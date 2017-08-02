@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动家庭能力开放平台 Authorization 生成器</title>
+</head>
+<style>
+	h1 {
+		text-align: center;
+		color: #4ECB9F;
+		margin-bottom: 20px;
+	}
+	span{
+		color: #4ECB9F;
+		font-size: 20px;
+	}
+	.content {
+		text-align: center;
+	}
+	.content input {
+		width: 100%;
+		height: 40px;
+		font-size: 16px;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	#secreBtn {
+		width: 30%;
+		height: 40px;
+		background: #4ECB9F;
+		color: #fff;
+		border: 0;
+	}
+	#result {
+		width: 50%;
+		height: 55px;
+		margin-top: 20px;
+		font-size: 16px;
+		resize:none;
+	}
+</style>
+<body>
+	<h1>移动家庭能力开放平台 Authorization 生成器</h1>
+	<div class="content">
+		<span>apikey</span>
+		<input type="text" id="apikey" placeholder="apikey">
+		<span>secretKey</span>
+		<input type="text" id="secretKey" placeholder="secretKey">
+		<button type="button" id="secreBtn">加密</button>
+		<br>
+		<textarea id="result" rows="30" cols="30"></textarea> 	
+	</div>
+	
+	<script src="md5.js"></script>
+	<script src="jbase64.js"></script>
+	<script type="text/javascript" src="alphabet.min.js"></script>
+	<script>
+		var apikey = document.getElementById('apikey');
+		var secretKey = document.getElementById('secretKey');
+		var secreBtn = document.getElementById('secreBtn');
+		var result = document.getElementById('result');
+		var md5str;
+		var jsonstr;
+		secreBtn.onclick=function(){
+			var timestemp = new Date().getTime();
+			var str = apikey.value+secretKey.value+timestemp;
+			console.log("拼接后字符串：" + str);
+			console.log("md5加密后字符串：" + hex_md5(str));
+			md5str = hex_md5(str);
+			jsonstr = '{"apiKey": "'+apikey.value+'","time": "'+timestemp+'","sign":"'+ md5str+'"}';
+			console.log(BASE64.encoder(jsonstr));
+			result.innerHTML= BASE64.encoder(jsonstr);
+		}
+		 
+		 console.log(Alphabet('ZZESKLREN','planar'));
+		
+	</script>
+</body>
+</html>
+
