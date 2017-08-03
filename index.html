@@ -31,12 +31,16 @@
 		text-align: center;
 		margin-bottom: 20px;
 	}
-	#secreBtn {
+	#secreBtn,
+	#remBtn {
 		width: 30%;
 		height: 40px;
 		background: #4ECB9F;
 		color: #fff;
 		border: 0;
+	}
+	#remBtn{
+		width: 20%;
 	}
 	#result {
 		width: 50%;
@@ -54,6 +58,7 @@
 		<span>secretKey</span>
 		<input type="text" id="secretKey" placeholder="secretKey">
 		<button type="button" id="secreBtn">加密</button>
+		<button type="button" id="remBtn">记住</button>
 		<br>
 		<textarea id="result" rows="30" cols="30"></textarea> 	
 	</div>
@@ -66,8 +71,11 @@
 		var secretKey = document.getElementById('secretKey');
 		var secreBtn = document.getElementById('secreBtn');
 		var result = document.getElementById('result');
+		var remBtn = document.getElementById('remBtn');
 		var md5str;
 		var jsonstr;
+		apikey.value = localStorage.getItem("apikey");
+		secretKey.value = localStorage.getItem("secretKey");
 		secreBtn.onclick=function(){
 			var timestemp = new Date().getTime();
 			var str = apikey.value+secretKey.value+timestemp;
@@ -78,7 +86,18 @@
 			console.log(BASE64.encoder(jsonstr));
 			result.innerHTML= BASE64.encoder(jsonstr);
 		}
-		 
+		if (!localStorage.getItem("apikey")) {
+				remBtn.disable = false;
+				remBtn.style.backgroundColor = "#4ECB9F";
+		}else{
+			remBtn.style.backgroundColor = "#E0E1E1";
+		}
+		remBtn.onclick = function(){
+			localStorage.setItem("apikey",apikey.value);
+			localStorage.setItem("secretKey",secretKey.value);
+			remBtn.style.backgroundColor = "#E0E1E1";
+
+		}
 		 console.log(Alphabet('ZZESKLREN','planar'));
 		 console.log("风里雨里，简书等你，http://www.jianshu.com/u/5bbe008f9b84")
 		
