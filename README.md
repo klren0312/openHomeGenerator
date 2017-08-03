@@ -21,3 +21,8 @@ jsonStr = {
  - md5.js(项目里有)
  - [jbase64.js](https://git.oschina.net/loonhxl/jbase64.git)
 
+
+### 日志
+
+ - 2017.8.2 基本架构
+ - 2017.8.3 进行功能优化
